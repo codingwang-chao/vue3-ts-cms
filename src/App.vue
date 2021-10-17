@@ -1,6 +1,5 @@
 <template>
-  <div class="layout">
-    <router-link to="/" />
+  <div id="app">
     <router-view/>
   </div>
 </template>
@@ -13,8 +12,8 @@
   text-align: center;
   color: #2c3e50;
 }
-.layout {
-  width: 100%;
-  height: 100%;
-}
+// body{
+//   padding: 0;
+//   margin: 0;
+// }
 </style>

@@ -1,12 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import createStore from './store'
 
-// import 'normalize.css'
 import './assets/css/index.less'
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-createApp(App).use(store).use(router).use(ElementPlus).mount('#app')
+import 'normalize.css'
+
+createApp(App).use(createStore).use(router).use(ElementPlus).mount('#app')
