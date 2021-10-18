@@ -60,7 +60,8 @@ request.interceptors.response.use(
     return res.data
   },
   err => {
-    console.log(err)
+    ElMessage.error(err.name)
+    console.log(err, '这是错误信息')
   }
 )
 

@@ -3,6 +3,7 @@ import { ILoginState } from './types'
 import { IRootState } from "../../types";
 import { loginHttp, loginUserInfo, loginUserMenuById } from '@/api/login'
 import localStorageWc from "@/utils/localStorage";
+import router from "@/router";
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -49,10 +50,12 @@ const loginModule: Module<ILoginState, IRootState> = {
       localStorageWc.set('userMenus', userMenus)
 
       // 4.登录跳转到首页
+      router.push('/')
     }
   },
-
-
+  getters: {
+    
+  }
 }
 
 export default loginModule
