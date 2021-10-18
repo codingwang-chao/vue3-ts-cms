@@ -1,7 +1,7 @@
 <template>
   <div class="layoutContainer">
-    <el-container>
-      <el-aside width="200px">
+    <el-container class="container-layout">
+      <el-aside width="250px" class="aside-layout">
         <layout-aside />
       </el-aside>
       <el-container>
@@ -25,6 +25,17 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.layoutContainer {
+  height: 100%;
+
+  .container-layout {
+    height: 100%;
+  }
+
+  .aside-layout {
+    height: 100%;
+  }
+}
 .el-header,
   .el-footer {
     background-color: #263242;

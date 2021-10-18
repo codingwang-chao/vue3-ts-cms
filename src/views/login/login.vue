@@ -48,7 +48,7 @@ export default {
 
 <style lang='less' scoped>
 .loginContainer {
-  height: 100vh;  
+  height: 100%;  
   background: url(../../assets/images/bj.jpg) no-repeat;
   display: flex;
   justify-content: center;

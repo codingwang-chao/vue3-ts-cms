@@ -43,7 +43,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       commit('userInfoChange', userInfo)
       localStorageWc.set('userInfo', userInfo)
 
-      // 3.获取对呀角色的菜单
+      // 3.获取对应角色的菜单
       const userMenuResult = await loginUserMenuById(userInfo.role.id)
       const userMenus = userMenuResult.data
       commit('changeUserMenus', userMenus)

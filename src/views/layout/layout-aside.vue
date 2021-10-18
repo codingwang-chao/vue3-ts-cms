@@ -10,7 +10,7 @@
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
-      background-color="#545c64"
+      background-color="#001529"
       text-color="#fff"
       active-text-color="#ffd04b"
     >
@@ -66,6 +66,9 @@ export default {
 
 <style lang='less' scoped>
 .asideContainer {
+  height: 100%;
+  background-color: #0f1b27 !important;
+
   .logo {
     display: flex;
     height: 28px;
@@ -83,6 +86,15 @@ export default {
       font-size: 16px;
       font-weight: 700;
       color: white;
+    }
+
+    .el-menu .el-menu-vertical-demo {
+      background-color: #001529 !important;
+    }
+
+    .el-menu-vertical-demo {
+      .el-icon-location {
+      }
     }
   }
 }
