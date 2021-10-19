@@ -1,7 +1,7 @@
 <template>
   <div class="loginContainer">
     <div class="center-login">
-      <h1>后台管理系统</h1>
+      <h1 class="toptitle">后台管理系统</h1>
       <el-tabs type="border-card" class="login" v-model="activeLogin" stretch>
         <el-tab-pane name="userLogin">
           <template #label>
@@ -53,10 +53,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
   .center-login {
     width: 320px;
     margin-bottom: 120px;
+
+    .toptitle { 
+      text-align: center;
+    }
   }
+
   .buttonLogin {
     margin-top: 15px;
     width: 320px;

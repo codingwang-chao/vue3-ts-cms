@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import login from './modules/login/login'
 
-export default createStore({
+const store =  createStore({
   state() {
     return {
       entireDepartment: [],
@@ -17,3 +17,9 @@ export default createStore({
     login
   }
 })
+
+export const setupStore = () => {
+  store.dispatch('login/reloadLoginInfo')
+}
+
+export default store

@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import createStore from './store'
+import store, { setupStore } from './store'
 
 import 'normalize.css'
 
@@ -10,4 +10,7 @@ import 'element-plus/dist/index.css'
 
 import './assets/css/index.css'
 
-createApp(App).use(createStore).use(router).use(ElementPlus).mount('#app')
+// 每次刷新都vuex中的login模块赋值
+setupStore()
+
+createApp(App).use(store).use(router).use(ElementPlus).mount('#app')

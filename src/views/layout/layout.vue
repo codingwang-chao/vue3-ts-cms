@@ -1,11 +1,13 @@
 <template>
   <div class="layoutContainer">
     <el-container class="container-layout">
-      <el-aside width="250px" class="aside-layout">
-        <layout-aside />
+      <el-aside :width="isCollapse==false?'210px':'64px'" class="aside-layout">
+        <layout-aside :isCollapse='isCollapse' />
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <layout-header @foldClick='foldClick' />
+        </el-header>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
@@ -14,11 +16,17 @@
 
 <script>
 import layoutAside from './layout-aside.vue'
+import LayoutHeader from './layout-header.vue'
 export default {
-  components: { layoutAside },
+  components: { layoutAside, LayoutHeader },
   data() {
     return {
-      
+      isCollapse: false
+    }
+  },
+  methods: {
+    foldClick(value) {
+      this.isCollapse = value
     }
   },
 }
@@ -27,6 +35,7 @@ export default {
 <style lang='less' scoped>
 .layoutContainer {
   height: 100%;
+  width: 100%;
 
   .container-layout {
     height: 100%;
@@ -34,27 +43,27 @@ export default {
 
   .aside-layout {
     height: 100%;
+    
+    //展开关闭左侧菜单栏的过度动画
+    transition: width 0.5s;
   }
 }
 .el-header,
   .el-footer {
-    background-color: #263242;
+    background-color: #ffffff;
     color: var(--el-text-color-primary);
-    text-align: center;
     line-height: 60px;
   }
 
   .el-aside {
     background-color: #33404d;
     color: var(--el-text-color-primary);
-    text-align: center;
     line-height: 100vh;
   }
 
   .el-main {
     background-color: #e9eef3;
     color: var(--el-text-color-primary);
-    text-align: center;
     line-height: 160px;
   }
 

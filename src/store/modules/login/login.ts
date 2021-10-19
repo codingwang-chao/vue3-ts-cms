@@ -51,10 +51,27 @@ const loginModule: Module<ILoginState, IRootState> = {
 
       // 4.登录跳转到首页
       router.push('/')
+    },
+
+    // 重新加载关于用户的登录信息 主要是防止用户刷新之后vuex的数据清空，不再通过直接赋值login中state通过commit来改变vuex中的state状态
+    reloadLoginInfo({ commit, dispatch }) {
+      const token = localStorageWc.get('token')
+      if(token){
+        commit('tokenChange', token)
+      }
+      const userInfo = localStorageWc.get('userInfo')
+      if(userInfo) {
+        commit('userInfoChange', userInfo)
+      }
+      const userMenus = localStorageWc.get('userMenus')
+      if(userMenus) {
+        commit('changeUserMenus', userMenus)
+      }
     }
   },
+
   getters: {
-    
+
   }
 }
 

@@ -2,77 +2,78 @@
   <div class="asideContainer">
     <div class="logo">
       <img src="~@/assets/images/logo.svg" alt="logo" class="img">
-      <span class="title">Vue3+TS</span>
+      <span class="title" v-if="!isCollapse">Vue3+TS</span>
     </div>
     <el-menu
       :uniqueOpened="true"
       default-active="2"
       class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
-      background-color="#001529"
-      text-color="#fff"
-      active-text-color="#ffd04b"
+      background-color="#0c2135"
+      text-color="#b7bdc3"
+      active-text-color="#0a60bd"
+      :collapse="isCollapse"
     >
-      <el-sub-menu index="1">
-        <template #title>
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
+      <template v-for="item in userMenus" :key="item.id"> 
+        <template v-if="item.type === 1">
+
+          <el-sub-menu :index="item.id+''">
+
+            <template #title>
+              <i :class="item.icon"></i>
+              <span>{{item.name}}</span>
+            </template>
+
+            <template v-for="child in item.children" :key="child.id">
+              <el-menu-item :index="child.id + ''">{{child.name}}</el-menu-item>
+            </template>
+
+          </el-sub-menu>  
+
         </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
-      <el-sub-menu index="2">
-        <template #title>
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
+
+        <!-- 一级菜单 -->
+        <template v-else-if="item.type === 2">
+          <el-menu-item :index="item.id + ''">
+            <i :class="icon"></i>
+            <template #title>{{item.name}}</template>
+          </el-menu-item>
         </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
-      <el-sub-menu index="3">
-        <template #title>
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
-      <el-sub-menu index="4">
-        <template #title>
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
+
+      </template>
     </el-menu>
   </div>
 </template>
 
 <script>
 export default {
-
+  props: {
+    isCollapse: {
+      type: Boolean,
+      defualt: false
+    }
+  },
+  data() {
+    return {
+      
+    }
+  },
+  computed: {
+    userMenus() {
+      return this.$store.state.login.userMenus
+    }
+  },
 }
 </script>
 
 <style lang='less' scoped>
 .asideContainer {
   height: 100%;
-  background-color: #0f1b27 !important;
+  background-color: #001529 !important;
 
   .logo {
     display: flex;
     height: 28px;
-    padding: 12px 10px 8px 10px;
+    padding: 16px 10px 16px 6px;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -87,16 +88,40 @@ export default {
       font-weight: 700;
       color: white;
     }
+  }
 
-    .el-menu .el-menu-vertical-demo {
-      background-color: #001529 !important;
-    }
+  .el-menu {
+    border-right: none;
+  }
 
-    .el-menu-vertical-demo {
-      .el-icon-location {
-      }
+  // 目录
+  .el-submenu {
+    background-color: #001529 !important;
+    // 二级菜单 ( 默认背景 )
+    .el-menu-item {
+      padding-left: 50px !important;
+      background-color: #0c2135 !important;
     }
   }
+
+  ::v-deep .el-submenu__title {
+    background-color: #001529 !important;
+  }
+
+  // hover 高亮
+  .el-menu-item:hover {
+    color: #fff !important; // 菜单
+  }
+
+  .el-menu-item.is-active {
+    color: #fff !important;
+    background-color: #0a60bd !important;
+  }
+}
+
+.el-menu-vertical:not(.el-menu--collapse) {
+  width: 100%;
+  height: calc(100% - 48px);
 }
 
 </style>
