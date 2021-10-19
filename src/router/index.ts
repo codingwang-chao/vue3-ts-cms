@@ -5,6 +5,10 @@ import localStorageWc from '@/utils/localStorage'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    redirect: '/layout'
+  },
+  {
+    path: '/layout',
     name: 'layout',
     component: layout,
     meta: {
@@ -24,10 +28,12 @@ const routes: Array<RouteRecordRaw> = [
       next()
     }
   },
-  // {
-  //   path: '*',
-  //   component: () => import('../views/error/error_404.vue')
-  // },
+  //404没有的对呀路由跳转到次页面
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'notFount',
+    component: () => import('../views/notFound/NotFound_404.vue')
+  },
 ]
 
 const router = createRouter({

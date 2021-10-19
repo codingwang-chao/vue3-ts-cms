@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="notFoundContainer">
     <img src="../../assets/images/404.png" alt="">
   </div>
 </template>
@@ -10,6 +10,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang='less' scoped>
+.notFoundContainer {
+  text-align: center;
+}
 </style>
