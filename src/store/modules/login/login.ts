@@ -4,6 +4,8 @@ import { IRootState } from "../../types";
 import { loginHttp, loginUserInfo, loginUserMenuById } from '@/api/login'
 import localStorageWc from "@/utils/localStorage";
 import router from "@/router";
+import  mapToRoutes  from '@/utils/mapToRoutes'
+import { RouteRecordRaw } from "vue-router";
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -25,6 +27,12 @@ const loginModule: Module<ILoginState, IRootState> = {
     }, 
     changeUserMenus(state, payload) {
       state.userMenus = payload
+
+      let routes = mapToRoutes(payload)
+      // 添加routes
+      routes.forEach((route: RouteRecordRaw) => {
+        router.addRoute('main', route)
+      })
     }
   },
   actions: {

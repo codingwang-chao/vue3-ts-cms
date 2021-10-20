@@ -5,7 +5,7 @@
       <span class="title" v-if="!isCollapse">Vue3+TS</span>
     </div>
     <el-menu
-      :uniqueOpened="true"
+      :uniqueOpened="false"
       default-active="2"
       class="el-menu-vertical-demo"
       background-color="#0c2135"
@@ -24,7 +24,12 @@
             </template>
 
             <template v-for="child in item.children" :key="child.id">
-              <el-menu-item :index="child.id + ''">{{child.name}}</el-menu-item>
+
+              <el-menu-item :index="child.id + ''" @click="menuClick(child)">
+                <i v-if="child.icon" :class="child.icon"></i>
+                <span>{{child.name}}</span>
+              </el-menu-item>
+              
             </template>
 
           </el-sub-menu>  
@@ -33,7 +38,7 @@
 
         <!-- 一级菜单 -->
         <template v-else-if="item.type === 2">
-          <el-menu-item :index="item.id + ''">
+          <el-menu-item :index="item.id + ''" @click="menuClick(item)">
             <i :class="icon"></i>
             <template #title>{{item.name}}</template>
           </el-menu-item>
@@ -60,6 +65,11 @@ export default {
   computed: {
     userMenus() {
       return this.$store.state.login.userMenus
+    }
+  },
+  methods: {
+    menuClick(value) {
+      this.$router.push(value.url)
     }
   },
 }

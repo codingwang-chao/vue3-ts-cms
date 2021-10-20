@@ -43,7 +43,6 @@ const router = createRouter({
 
 //全局前置守卫
 router.beforeEach((to, from, next) => {
-  console.log(to, 'beforeEach')
   const userInfo = localStorageWc.get('userInfo')
   if(to.path != '/login') {
     if(userInfo) {
