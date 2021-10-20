@@ -31,7 +31,8 @@ const loginModule: Module<ILoginState, IRootState> = {
       let routes = mapToRoutes(payload)
       // 添加routes
       routes.forEach((route: RouteRecordRaw) => {
-        router.addRoute('main', route)
+        //router.addRoute()这是一个原生的方法，第一个参数是加到哪个路由下面，第二个参数是加入这个路由下的子路由，就是children路由
+        router.addRoute('layout', route)
       })
     }
   },

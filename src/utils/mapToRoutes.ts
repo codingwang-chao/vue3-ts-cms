@@ -21,3 +21,13 @@ export default function mapToRoutes (userMenus: any|[]) {
 
   return routes
 }
+
+export function getDefaultActive(userMenus: any, pathCurrent: any) {
+  userMenus.forEach((menu: { type: number, children?: [], url?: any, id: any }) => {
+    if(menu.type === 1) {
+      getDefaultActive(menu.children, pathCurrent)
+    }else if(menu.type === 2 && menu.url === pathCurrent) {
+      return menu.id
+    }
+  })
+}

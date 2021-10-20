@@ -6,7 +6,7 @@
     </div>
     <el-menu
       :uniqueOpened="false"
-      default-active="2"
+      :default-active="defaultActive"
       class="el-menu-vertical-demo"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import localStorageWc from '@/utils/localStorage'
+import { getDefaultActive } from '@/utils/mapToRoutes'
 export default {
   props: {
     isCollapse: {
@@ -59,19 +61,31 @@ export default {
   },
   data() {
     return {
-      
+      defaultActive: localStorageWc.get('defaultActive')||'2'
     }
   },
   computed: {
     userMenus() {
       return this.$store.state.login.userMenus
-    }
+    },
+    // pathCurrent() {
+    //   return route.path
+    // }
   },
+  // created: {
+  //   aaDefaultActive()
+  // },
   methods: {
     menuClick(value) {
+      console.log(value, 'vualeeeeeeeeeee')
+      localStorageWc.set('defaultActive', value.id+'')
+      this.defaultActive = localStorageWc.get('defaultActive')
       this.$router.push(value.url)
     }
   },
+  // aaDefaultActive() {
+  //   getDefaultActive(userMenus,pathCurrent)
+  // }
 }
 </script>
 
