@@ -5,11 +5,11 @@
     </div>
 
     <div class="flexContainer">
+      <!-- 面包屑 -->
       <el-breadcrumb separator="/" class="breadCrumbContainer">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        <template v-for="item in breadCrumbArr" :key="item.name">
+          <el-breadcrumb-item>{{item.name}}</el-breadcrumb-item>
+        </template>
       </el-breadcrumb>
 
       <el-dropdown trigger="click" class="userInfoContainer">
@@ -30,10 +30,20 @@
 
 <script>
 import localStorageWc from '@/utils/localStorage'
+import { createBreadCrumbArr } from '@/utils/mapToRoutes'
 export default {
   data() {
     return {
       isCollapse: false
+    }
+  },
+  // 计算属性的使用方法
+  computed: {
+    breadCrumbArr() {
+      const menus = this.$store.state.login.userMenus
+      const pathCurrent = this.$route.path
+      const arr = createBreadCrumbArr(menus, pathCurrent)
+      return arr
     }
   },
   methods: {

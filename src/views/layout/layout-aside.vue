@@ -16,6 +16,7 @@
       <template v-for="item in userMenus" :key="item.id"> 
         <template v-if="item.type === 1">
 
+          <!-- index必须为字符串类型,不能为数字 -->
           <el-sub-menu :index="item.id+''">
 
             <template #title>
@@ -50,8 +51,7 @@
 </template>
 
 <script>
-import localStorageWc from '@/utils/localStorage'
-import { getDefaultActive } from '@/utils/mapToRoutes'
+import { getDefaultActive, firstMenu } from '@/utils/mapToRoutes'
 export default {
   props: {
     isCollapse: {
@@ -61,31 +61,36 @@ export default {
   },
   data() {
     return {
-      defaultActive: localStorageWc.get('defaultActive')||'2'
+      defaultActive: '2'
     }
   },
   computed: {
     userMenus() {
       return this.$store.state.login.userMenus
     },
-    // pathCurrent() {
-    //   return route.path
-    // }
-  },
-  // created: {
-  //   aaDefaultActive()
-  // },
-  methods: {
-    menuClick(value) {
-      console.log(value, 'vualeeeeeeeeeee')
-      localStorageWc.set('defaultActive', value.id+'')
-      this.defaultActive = localStorageWc.get('defaultActive')
-      this.$router.push(value.url)
+    pathCurrent() {
+      return this.$route.path
     }
   },
-  // aaDefaultActive() {
-  //   getDefaultActive(userMenus,pathCurrent)
-  // }
+  created() {
+    this.getDefaultAvlue()
+  },
+  methods: {
+    menuClick(value) {
+      //方法1. 获取当前路由对应的菜单栏高亮,用户首次进来,现在默认高亮,点击其它菜单,保存次菜单的index到本地存储,
+      // 再次刷新页面组件会自动记录当前路径,但是菜单栏高亮不会记录,所以这时就去取本地存储的高亮index,
+      // 但是存在弊端,用户下次打开时,还会自动跳转到上次本地存储记录的菜单栏
+      // localStorageWc.set('defaultActive', value.id+'')
+      // this.defaultActive = localStorageWc.get('defaultActive')
+      this.$router.push(value.url)
+      this.getDefaultAvlue()
+    },
+
+    // 方法2. 通过当前路由每次刷新都动态匹配用户所有的菜单,来得到高亮菜单,如果第一次进入则取用户第一个权限菜单
+    getDefaultAvlue() {
+      this.defaultActive = getDefaultActive(this.userMenus, this.pathCurrent).id?.toString() || firstMenu.id+''
+    }
+  }
 }
 </script>
 

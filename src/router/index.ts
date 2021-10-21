@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import layout from '../views/layout/layout.vue'
 import localStorageWc from '@/utils/localStorage'
+import { firstMenu } from '@/utils/mapToRoutes'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -46,11 +47,17 @@ router.beforeEach((to, from, next) => {
   const userInfo = localStorageWc.get('userInfo')
   if(to.path != '/login') {
     if(userInfo) {
+
+      // 如果是第一次登录,会跳到用户第一个权限路由
+      if(to.path === '/layout'){
+        router.push(firstMenu.url)
+      }
       next()
     }else {
       next('/login')
     }
-  }else {
+  }
+  else {
     next()
   }
 })

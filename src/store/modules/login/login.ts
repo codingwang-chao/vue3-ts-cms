@@ -15,7 +15,8 @@ const loginModule: Module<ILoginState, IRootState> = {
       userInfo: {},
       userMenus: [],
       //用户权限数组
-      permissionArr: []
+      permissionArr: [],
+      breadCrumbArr: []
     }
   },
   mutations: {
