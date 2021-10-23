@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      defaultActive: '2'
+      defaultActive: firstMenu+''
     }
   },
   computed: {
@@ -83,7 +83,6 @@ export default {
       // localStorageWc.set('defaultActive', value.id+'')
       // this.defaultActive = localStorageWc.get('defaultActive')
       this.$router.push(value.url)
-      this.getDefaultAvlue()
     },
 
     // 方法2. 通过当前路由每次刷新都动态匹配用户所有的菜单,来得到高亮菜单,如果第一次进入则取用户第一个权限菜单
