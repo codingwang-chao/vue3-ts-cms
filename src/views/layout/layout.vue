@@ -9,7 +9,9 @@
           <layout-header @foldClick='foldClick' />
         </el-header>
         <el-main>
-          <router-view />
+          <div class="main-info">
+            <router-view />
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -41,6 +43,15 @@ export default {
 
   .container-layout {
     height: 100%;
+
+    .el-main {
+      padding-top: 10px;
+    }
+
+    .main-info {
+      background-color: #ffffff;
+      border-radius: 5px;
+    }
   }
 
   .aside-layout {

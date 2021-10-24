@@ -79,6 +79,8 @@ export default {
   text-align: center;
 
   .header {
+    //手指放上去会显示一个小手
+    cursor: pointer;
     display: flex;
     align-items: center;
 
