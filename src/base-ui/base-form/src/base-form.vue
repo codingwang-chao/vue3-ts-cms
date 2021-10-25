@@ -1,15 +1,18 @@
 <template>
   <div class="formContainer">
-    <el-form ref="form" :model="form" :label-width="labelWidth">
+    <div>
+      <slot name="header"></slot>
+    </div>
+    <el-form ref="form" :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.field">
           <el-col v-bind="colLayout">
             <el-form-item :label="item.label" :style="itemStyle">
               <template v-if="item.type === 'input'">
-                <el-input style="max-width:180px" size="mini" :placeholder='item.placeholder'></el-input>
+                <el-input style="max-width:180px" size="mini" :placeholder='item.placeholder' v-model="formData[`${item.field}`]"></el-input>
               </template>
               <template v-else-if="item.type === 'select'">
-                <el-select size="mini" style="max-width: 180px" :placeholder="item.placeholder" >
+                <el-select size="mini" style="max-width: 180px" v-model="formData[`${item.field}`]" :placeholder="item.placeholder" >
                   <el-option 
                     :label="option.name" 
                     v-for="(option,index) in item.options" 
@@ -24,6 +27,7 @@
                   range-separator="-"
                   size="mini"
                   style="max-width: 180px"
+                  v-model="formData[`${item.field}`]"
                 >
                 </el-date-picker>
               </template>
@@ -31,8 +35,10 @@
           </el-col>
         </template>
         <el-form-item>
-          <el-button type="primary" size="mini" @click="resetClick">重置</el-button>
-          <el-button type="primary" size="mini" @click="seachClick">搜索</el-button>
+          <slot name="footer">
+            <!-- <el-button type="primary" size="mini" @click="resetClick">重置</el-button>
+            <el-button type="primary" size="mini" @click="searchClick">搜索</el-button> -->
+          </slot>
         </el-form-item>
       </el-row>
     </el-form>
@@ -61,22 +67,46 @@
         })
       },
       itemStyle: {
-        type: String,
+        type: Object,
         default: () => ({})
+      },
+      modelValue: {
+        type: Object,
+        defalut: () => ({})
       }
     },
     data() {
       return {
+        // formData: {}
+      }
+    },
+    created() {
 
+    },
+    //watch的使用，当formData发生改变，将新的值发送给父组件，从而改变外面formData的值，它的只改变从而处理它改变后的操作
+    watch: {
+      formData: {
+        handler(newValue) {
+          this.$emit('update:modelValue', newValue)
+        },
+        deep: true
+      }
+    },
+    //computed的使用，如果父组件通过v-model绑定给子组件的值modelValue发生改变，则会引起computed中fomrData的就算，将modelValue的值返回给formData，
+    // formData依赖的值发生改变，从而改变formData的值，会使用return来改变值
+    computed: {
+      formData() {
+        return this.modelValue
       }
     },
     methods: {
-      resetClick() {
-        console.log('resetClick!')
-      },
-      seachClick() {
-        console.log('seachClick!')
-      },
+      // resetClick() {
+      //   this.$emit('resetHandle', this.formData)
+      //   console.log('resetClick!')
+      // },
+      // searchClick() {
+      //   console.log('searchClick!')
+      // },
     },
   }
 </script>

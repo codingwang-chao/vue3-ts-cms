@@ -29,7 +29,7 @@ export default {
     }
   },
   methods: {
-    foldClick(value) {
+    foldClick(value) {  
       this.isCollapse = value
     }
   },
@@ -46,6 +46,8 @@ export default {
 
     .el-main {
       padding-top: 10px;
+      line-height: 30px;
+      text-align: center;
     }
 
     .main-info {

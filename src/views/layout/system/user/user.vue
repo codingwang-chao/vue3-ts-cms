@@ -1,14 +1,17 @@
 <template>
   <div class="userContainer">
-    <base-form :formItems='formItems' :labelWidth='labelWidth'/>
+    <page-search
+      :formItems='formItems'
+      labelWidth='90px'
+    ></page-search>
   </div>
 </template>
 
 <script>
-import baseForm from '@/base-ui/base-form/index.js'
+import PageSearch from '@/components/page-seach'
   export default {
     components: {
-      baseForm
+      PageSearch
     },
     data() {
       return {
@@ -58,8 +61,19 @@ import baseForm from '@/base-ui/base-form/index.js'
             }
           }
         ],
-        labelWidth: '90px'
       }
     },
+    //最好在mounted的生命周期函数中请求数据
+    mounted() {
+      this.init()
+    },
+    methods: {
+      init() {
+        const queryInfo = {
+          url: 'users'
+        }
+        this.$store.dispatch('system/getPageListAction', queryInfo)
+      }
+    }
   }
 </script>
