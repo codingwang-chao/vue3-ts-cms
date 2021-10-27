@@ -6,9 +6,19 @@
     ></page-search>
 
     <base-table :propList='usersList' :tableItems='tableItems'>
+
       <template #enable='scope'>
         <el-button type="primary" size="mini">{{scope.row.enable==1?'启用':'禁用'}}</el-button>
       </template>
+
+      <template #createAt='scope'>
+        <span>{{$filters.formatTime(scope.row.createAt)}}</span>
+      </template>
+
+      <template #updateAt='scope'>
+        <span>{{$filters.formatTime(scope.row.updateAt)}}</span>
+      </template>
+
     </base-table>
 
   </div>

@@ -9,8 +9,11 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 import './assets/css/index.css'
+import { globalRegister } from './global'
 
 // 每次刷新都vuex中的login模块赋值
 setupStore()
 
-createApp(App).use(store).use(router).use(ElementPlus).mount('#app')
+// app.use(globalRegister)globalRegister(app)
+
+createApp(App).use(store).use(router).use(ElementPlus).use(globalRegister).mount('#app')

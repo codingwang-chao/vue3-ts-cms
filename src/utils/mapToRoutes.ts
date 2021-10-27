@@ -50,7 +50,10 @@ export function getDefaultActive(userMenus: any, pathCurrent: any, breadCrumbArr
   }
 }
 
-//面包屑
+/*
+ * * 面包屑
+ */
+
 export function createBreadCrumbArr(userMenus: any, pathCurrent: any) {
   let breadCrumbArr: {name: any, path?: any}[] = []
   getDefaultActive(userMenus, pathCurrent, breadCrumbArr)
