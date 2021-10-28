@@ -8,6 +8,8 @@ import 'normalize.css'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+
 import './assets/css/index.css'
 import { globalRegister } from './global'
 
@@ -16,4 +18,6 @@ setupStore()
 
 // app.use(globalRegister)globalRegister(app)
 
-createApp(App).use(store).use(router).use(ElementPlus).use(globalRegister).mount('#app')
+createApp(App).use(store).use(router).use(ElementPlus, {
+  locale: zhCn,
+}).use(globalRegister).mount('#app')

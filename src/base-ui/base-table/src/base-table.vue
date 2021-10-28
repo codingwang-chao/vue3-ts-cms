@@ -1,6 +1,40 @@
 <template>
   <div class="tableStyle">
-    <el-table :data="propList" border style="width: 100%">
+    <div class="header">
+
+      <div>
+        <slot name="headerLeft"></slot>
+      </div>
+
+      <div>
+        <slot name="headerRight"></slot>
+      </div>
+
+    </div>
+
+    <el-table 
+      :data="propList" 
+      border 
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+    >
+
+      <el-table-column
+        type="selection"
+        width="35"
+        v-if="showSelectBox"
+      > 
+      </el-table-column>
+
+      <el-table-column
+        type="index"
+        width="50"
+        label="序号"
+        align="center"
+        v-if="showIndexColumn"
+      > 
+      </el-table-column>
+
       <template v-for="item in tableItems" :key="item.prop">
         <el-table-column 
           align="center" 
@@ -18,6 +52,11 @@
         </el-table-column>
       </template>
     </el-table>
+
+    <div class="footer">
+      <slot name="footer"></slot>
+    </div>
+
   </div>
 </template>
 
@@ -31,8 +70,26 @@ export default {
     tableItems: {
       type: Array,
       default: () => ([])
+    },
+    showSelectBox: {
+      type: Boolean,
+      default: false
+    },
+    showIndexColumn: {
+      type: Boolean,
+      default: false
+    },
+  },
+  data() {
+    return {
+      
     }
-  }
+  },
+  methods: {
+    handleSelectionChange(value) {
+      this.$emit('selectionChange', value)
+    }
+  },
 }
 </script>
 
@@ -40,5 +97,18 @@ export default {
   .tableStyle {
       padding: 20px;
       border-top: 20px solid #f5f5f5;
+
+      .header{ 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 10px 10px 0px;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: end;
+        margin-top: 10px;
+      }
     }
 </style>

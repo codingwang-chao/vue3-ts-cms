@@ -5,7 +5,16 @@
       labelWidth='90px'
     ></page-search>
 
-    <base-table :propList='usersList' :tableItems='tableItems'>
+    <base-table :propList='usersList' :tableItems='tableItems' :showSelectBox='true' showIndexColumn @selectionChange='handleSelectionChange'>
+
+      <template #headerLeft>
+        <span>用户列表</span>
+      </template>
+
+      <template #headerRight>
+        <el-button type="primary" size="mini">新增</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-refresh"></el-button>
+      </template>
 
       <template #enable='scope'>
         <el-button type="primary" size="mini">{{scope.row.enable==1?'启用':'禁用'}}</el-button>
@@ -17,6 +26,24 @@
 
       <template #updateAt='scope'>
         <span>{{$filters.formatTime(scope.row.updateAt)}}</span>
+      </template>
+
+      <template #handler>
+        <el-button type="text" size="mini">编辑</el-button>
+        <el-button type="text" size="mini">删除</el-button>
+      </template>
+
+      <template #footer>
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage4"
+          :page-sizes="[100, 200, 300, 400]"
+          :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400"
+        >
+        </el-pagination>
       </template>
 
     </base-table>
@@ -117,6 +144,9 @@ import baseTable from '@/base-ui/base-table'
           }
         })
       },
+      handleSelectionChange(value) {
+        console.log(value)
+      }
     }
   }
 </script>
