@@ -1,6 +1,7 @@
 <template>
   <div class="userContainer">
     <base-form 
+      ref="baseForm"
       :formItems='formItems' 
       v-model='formData' 
       :labelWidth='labelWidth'
@@ -34,27 +35,30 @@ import baseForm from '@/base-ui/base-form/index.js'
     },
     data() {
       return {
-        formData: {
-          name: '',
-          realname: '',
-          cellphone: '',
-          enable: '',
-          createAt: '',
-        }
+        formData: {},
+        initFormData: {}
       }
     },
+    created() {
+      this.init()  
+    },
+    computed: {
+
+    },
     methods: {
+      init() {
+        this.formItems.forEach(item => {
+          this.initFormData[item.field] = ''
+        });
+        this.formData = this.initFormData
+      },
       resetHandle() {
-        this.formData = {
-          name: '',
-          realname: '',
-          cellphone: '',
-          enable: '',
-          createAt: '',
-        }
+        this.init()
+        this.$emit('resetBtnClick')
       },
       searchClick() {
         console.log(this.formData, 'formDATA')
+        this.$emit('searchBtnClick', this.formData)
       }
     }
   }

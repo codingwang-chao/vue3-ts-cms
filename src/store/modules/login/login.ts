@@ -6,6 +6,7 @@ import localStorageWc from "@/utils/localStorage";
 import router from "@/router";
 import  mapToRoutes  from '@/utils/mapToRoutes'
 import { RouteRecordRaw } from "vue-router";
+import mapBtnreCursion from '@/utils/mapBtnpermissions'
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -14,7 +15,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       token: '',
       userInfo: {},
       userMenus: [],
-      //用户权限数组
+      //用户按钮权限数组
       permissionArr: [],
       breadCrumbArr: []
     }
@@ -35,6 +36,10 @@ const loginModule: Module<ILoginState, IRootState> = {
         //router.addRoute()这是一个原生的方法，第一个参数是加到哪个路由下面，第二个参数是加入这个路由下的子路由，就是children路由
         router.addRoute('layout', route)
       })
+
+      //获取用户的按钮权限数组
+      const permissionsArr = mapBtnreCursion(payload)
+      state.permissionArr = permissionsArr
     }
   },
   actions: {

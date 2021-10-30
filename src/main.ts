@@ -16,7 +16,7 @@ import { globalRegister } from './global'
 // 每次刷新都vuex中的login模块赋值
 setupStore()
 
-// app.use(globalRegister)globalRegister(app)
+// app.use(globalRegister)等同globalRegister(app)
 
 createApp(App).use(store).use(router).use(ElementPlus, {
   locale: zhCn,

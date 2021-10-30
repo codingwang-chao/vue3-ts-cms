@@ -3,61 +3,26 @@
     <page-search
       :formItems='formItems'
       labelWidth='90px'
+      @resetBtnClick='resetBtnClick'
+      @searchBtnClick='searchBtnClick'
     ></page-search>
 
-    <base-table :propList='usersList' :tableItems='tableItems' :showSelectBox='true' showIndexColumn @selectionChange='handleSelectionChange'>
-
-      <template #headerLeft>
-        <span>用户列表</span>
-      </template>
-
-      <template #headerRight>
-        <el-button type="primary" size="mini">新增</el-button>
-        <el-button type="primary" size="mini" icon="el-icon-refresh"></el-button>
-      </template>
-
-      <template #enable='scope'>
-        <el-button type="primary" size="mini">{{scope.row.enable==1?'启用':'禁用'}}</el-button>
-      </template>
-
-      <template #createAt='scope'>
-        <span>{{$filters.formatTime(scope.row.createAt)}}</span>
-      </template>
-
-      <template #updateAt='scope'>
-        <span>{{$filters.formatTime(scope.row.updateAt)}}</span>
-      </template>
-
-      <template #handler>
-        <el-button type="text" size="mini">编辑</el-button>
-        <el-button type="text" size="mini">删除</el-button>
-      </template>
-
-      <template #footer>
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="400"
-        >
-        </el-pagination>
-      </template>
-
-    </base-table>
+    <page-content 
+      ref="pageContent"
+      :tableItems='tableItems'
+      pageName="users"
+    />
 
   </div>
 </template>
 
 <script>
 import PageSearch from '@/components/page-seach'
-import baseTable from '@/base-ui/base-table'
+import pageContent from '@/components/page-content'
   export default {
     components: {
       PageSearch,
-      baseTable
+      pageContent
     },
     data() {
       return {
@@ -122,30 +87,12 @@ import baseTable from '@/base-ui/base-table'
         ]
       }
     },
-    //最好在mounted的生命周期函数中请求数据
-    mounted() {
-      this.init()
-    },
-    computed: {
-      usersList() {
-        return this.$store.state.system.usersListData
-      },
-      usersCount() {
-        return this.$store.state.system.usersCount
-      }
-    },
     methods: {
-      init() {
-        this.$store.dispatch('system/getPageListAction', {
-          pageUrl: '/users/list',
-          queryInfo: {
-            offset: 0,
-            size: 10
-          }
-        })
+      resetBtnClick() {
+        this.$refs.pageContent.getDataList()
       },
-      handleSelectionChange(value) {
-        console.log(value)
+      searchBtnClick(searchInfo) {
+        this.$refs.pageContent.getDataList(searchInfo)
       }
     }
   }

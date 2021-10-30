@@ -25,7 +25,7 @@ export default {
   components: { layoutAside, LayoutHeader },
   data() {
     return {
-      isCollapse: false
+      isCollapse: true
     }
   },
   methods: {

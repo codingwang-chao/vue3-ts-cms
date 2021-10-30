@@ -17,6 +17,7 @@
       border 
       style="width: 100%"
       @selection-change="handleSelectionChange"
+      v-bind="childrenProp"
     >
 
       <el-table-column
@@ -37,6 +38,7 @@
 
       <template v-for="item in tableItems" :key="item.prop">
         <el-table-column 
+          show-overflow-tooltip
           align="center" 
           :prop="item.prop" 
           :label="item.label" 
@@ -79,6 +81,10 @@ export default {
       type: Boolean,
       default: false
     },
+    childrenProp: {
+      type: Object,
+      default: () => ({})
+    }
   },
   data() {
     return {
