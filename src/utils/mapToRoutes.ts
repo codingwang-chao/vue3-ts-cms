@@ -1,3 +1,12 @@
+/**
+ * 动态注册路由
+ * 
+ * 1.在router文件下的mapMainChildren.ts中定义所有的路由，并没在router中注册
+ * 2.用户点击登录会获取当前登录用的所拥有的路由，将这些路由保存在store中
+ * 3.通过全部定义的路由过滤出当前用户所拥有的路由，然后在store的login模块中使用router.addRoute('layout', route)来注册路由
+ * 
+ */
+
 import { alllayoutChildren } from '@/router/mapMainChildren'
 
 //用户第一个权限菜单,用来用户首次登录显示默认的菜单栏

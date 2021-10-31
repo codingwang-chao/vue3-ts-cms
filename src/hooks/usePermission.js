@@ -1,4 +1,5 @@
 /**
+ * hooks里面是一个方法，utils是全局经常用的公共方法
  * 
  * @param {页面名} pageName 
  * @param {页面里的按钮} handleName 

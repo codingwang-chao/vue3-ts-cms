@@ -43,6 +43,7 @@ const systemStore: Module<ISystemState, IRootState> = {
     },
   },
   actions: {
+    //获取不同页面数据的actions方法
     async getPageListAction({ commit }, payLoad) {
       const { data }: any = await getListData(`/${payLoad.pageName}/list`, payLoad.queryInfo)
       const changeName = payLoad.pageName.slice(0,1).toUpperCase() + payLoad.pageName.slice(1)

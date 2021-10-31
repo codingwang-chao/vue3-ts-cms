@@ -43,6 +43,7 @@ const loginModule: Module<ILoginState, IRootState> = {
     }
   },
   actions: {
+    //用户点击登录调用
     async accountLoginAction({ commit }, payload: any) {
       console.log(payload, 'data')
 
