@@ -2,7 +2,8 @@
 import { Module } from "vuex/types/index.js";
 import type { ISystemState } from './types'
 import type { IRootState } from '@/store/types'
-import { getListData } from '@/api/main/system/system'
+import { getListData, htttpDeleteHandle } from '@/api/main/system/system'
+import message from "element-plus/lib/components/message";
 const systemStore: Module<ISystemState, IRootState> = {
   namespaced: true,
   state: {
@@ -18,7 +19,6 @@ const systemStore: Module<ISystemState, IRootState> = {
   mutations: {
     changeUsersListData(state, payLoad) {
       state.usersListData = payLoad
-      console.log(state.usersListData)
     },
     changeUsersCount(state, payLoad) {
       state.usersCount = payLoad
@@ -43,12 +43,27 @@ const systemStore: Module<ISystemState, IRootState> = {
     },
   },
   actions: {
-    //获取不同页面数据的actions方法
+    //获取页面数据的actions方法
     async getPageListAction({ commit }, payLoad) {
       const { data }: any = await getListData(`/${payLoad.pageName}/list`, payLoad.queryInfo)
       const changeName = payLoad.pageName.slice(0,1).toUpperCase() + payLoad.pageName.slice(1)
       commit(`change${changeName}ListData`, data.list)
       commit(`change${changeName}Count`, data.totalCount)
+    },
+
+    //删除页面数据
+    async deleteListAction({dispatch}, payLoad) {
+      const url = `${payLoad.pageName}/${payLoad.id}`
+      const res: any = await htttpDeleteHandle(url)
+      message.error(res.data)
+      //刷新列表
+      dispatch('getPageListAction', {
+        pageName: payLoad.pageName,
+        queryInfo: {
+          size: 10,
+          offset: 0
+        }
+      })
     }
   }
 }

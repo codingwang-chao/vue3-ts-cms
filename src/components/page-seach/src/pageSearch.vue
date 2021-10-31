@@ -46,16 +46,20 @@ import baseForm from '@/base-ui/base-form/index.js'
 
     },
     methods: {
+      //初始化formData表格数据，formData从formItems过滤得来
       init() {
         this.formItems.forEach(item => {
           this.initFormData[item.field] = ''
         });
         this.formData = this.initFormData
       },
+      //重置表格输入框要再次初始化，重新赋值为initFormData是不能完成重置操作的，
+      // 因为init初始化赋值时，时浅拷贝，formData与initFormData存储地址一样，其实改变其中一个值另外一个值会一起变化
       resetHandle() {
         this.init()
         this.$emit('resetBtnClick')
       },
+      //数据搜索
       searchClick() {
         console.log(this.formData, 'formDATA')
         this.$emit('searchBtnClick', this.formData)

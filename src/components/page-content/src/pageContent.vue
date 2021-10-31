@@ -16,7 +16,7 @@
       <!-- 如果里面有对应的插槽就会匹配替代里面的内容， 如果里面没有对应插槽的名字，就显示里面默认的名字 -->
       <!-- base-table里面的插槽名都是经过循环遍历的，tableItems里面传入的插槽名，在这里有对应的就会将这里的显示在table表单里 -->
       <template #headerRight v-if="isCreate">
-        <el-button type="primary" size="mini">新增</el-button>
+        <el-button type="primary" size="mini" @click="addHandle">新增</el-button>
         <el-button type="primary" size="mini" icon="el-icon-refresh"></el-button>
       </template>
 
@@ -32,9 +32,9 @@
         <span>{{$filters.formatTime(scope.row.updateAt)}}</span>
       </template>
 
-      <template #handler>
-        <el-button type="text" size="mini" v-if="isUpdata">编辑</el-button>
-        <el-button type="text" size="mini" v-if="isDelete">删除</el-button>
+      <template #handler='scope'>
+        <el-button type="text" size="mini" v-if="isUpdate" @click="editHandle(scope.row)">编辑</el-button>
+        <el-button type="text" size="mini" v-if="isDelete" @click="deleteHandle(scope.row)">删除</el-button>
       </template>
 
       <!-- 这里是插槽嵌套插槽、通过外面一层的template #[itemSlot]匹配放到baseTable的插槽位置 -->
@@ -90,7 +90,7 @@ export default {
       pageSize: 10,
       currentPage: 1,
       isCreate: false,
-      isUpdata: false,
+      isUpdate: false,
       isDelete: false,
       isQuery: false
     }
@@ -136,7 +136,7 @@ export default {
     //得到页面的按钮权限，来是否展示
     getBtnPermission() {
       this.isCreate = userPermission(this.pageName, 'create')
-      this.isUpdata = userPermission(this.pageName, 'updata')
+      this.isUpdate = userPermission(this.pageName, 'update')
       this.isDelete = userPermission(this.pageName, 'delete')
       this.isQuery = userPermission(this.pageName, 'query')
     },
@@ -153,6 +153,21 @@ export default {
     handleCurrentChange(value) {
       this.currentPage = value
       this.getDataList()
+    },
+    //删除
+    deleteHandle(row) {
+      this.$store.dispatch('system/deleteListAction', {
+        id: row.id,
+        pageName: this.pageName
+      })
+      console.log(row.id, 'valueeeeeeeeeeeeeeeee')
+    },
+    //编辑
+    editHandle(row) {
+      this.$emit('editHandle', row)
+    },
+    addHandle() {
+      this.$emit('addHandle')
     }
   }
 }

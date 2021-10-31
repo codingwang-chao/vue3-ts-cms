@@ -41,7 +41,8 @@ export default {
         { prop: 'oldPrice', label: '旧价格' },
         { prop: 'status', label: '状态' },
         { prop: 'createAt', label: '创建时间', width: '260', slotName: 'createAt' },
-        { prop: 'updateAt', label: '修改时间', width: '260', slotName: 'updateAt' }
+        { prop: 'updateAt', label: '修改时间', width: '260', slotName: 'updateAt' },
+        { prop: '操作', label: '操作', width: '120', slotName: 'handler' }
       ]
     }
   },
