@@ -47,7 +47,7 @@ export default {
     .el-main {
       padding-top: 10px;
       line-height: 30px;
-      text-align: center;
+      // text-align: center;
       background-color: #f5f5f5;
     }
 

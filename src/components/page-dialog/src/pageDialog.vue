@@ -1,13 +1,19 @@
 <template>
   <div class="pageDialogContainer">
-    <el-dialog title="收货地址" v-model="dialogFormVisible" destroy-on-close>
+    <el-dialog 
+      :title="title" 
+      v-model="dialogFormVisible" 
+      destroy-on-close
+      :width="width"
+      left
+    >
 
-      <base-form :formItems="dialogFormItems" v-model="formData"></base-form>
+      <base-form :formItems="dialogFormItems" v-model="formData" :colLayout="colLayout"></base-form>
 
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="comfirmHandle">确 定</el-button>
+          <el-button size="mini" @click="dialogFormVisible = false">取 消</el-button>
+          <el-button size="mini" type="primary" @click="comfirmHandle">确 定</el-button>
         </span>
       </template>
 
@@ -29,6 +35,20 @@ export default {
     formData: {
       type: Object,
       default: () => ({})
+    },
+    colLayout: {
+      type: Object,
+      default: () => ({
+        span: 12
+      })
+    },
+    width: {
+      type: String,
+      default: '40%'
+    },
+    title: {
+      type: String,
+      default: '新增'
     }
   },
   data() {

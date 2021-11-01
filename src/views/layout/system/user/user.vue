@@ -15,7 +15,13 @@
       @addHandle="addHandle"
     />
 
-    <page-dialog ref="pageDialog" :dialogFormItems="dialogFormItems" :formData="formData" />
+    <page-dialog 
+      ref="pageDialog" 
+      :dialogFormItems="dialogFormItems" 
+      :formData="formData" 
+      width='40%' 
+      :title='title'
+    />
 
   </div>
 </template>
@@ -133,6 +139,7 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
           // }
         ],
         formData: {},
+        title: '新增',
       }
     },
     methods: {
@@ -146,10 +153,9 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
       },
       //编辑list数据
       editHandle(row) {
+        this.title = '修改'
         this.$refs.pageDialog.dialogFormVisible = true
         this.formData = row
-        console.log(row, 'rowwwwwwwwwwwwwwwwwww')
-        console.log(this.formData, 'this.formData')
       },
       //新增
       addHandle() {
