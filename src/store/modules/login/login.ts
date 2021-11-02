@@ -44,7 +44,7 @@ const loginModule: Module<ILoginState, IRootState> = {
   },
   actions: {
     //用户点击登录调用
-    async accountLoginAction({ commit }, payload: any) {
+    async accountLoginAction({ commit, dispatch }, payload: any) {
       console.log(payload, 'data')
 
       // 1.实现登录逻辑
@@ -65,7 +65,11 @@ const loginModule: Module<ILoginState, IRootState> = {
       commit('changeUserMenus', userMenus)
       localStorageWc.set('userMenus', userMenus)
 
-      // 4.登录跳转到首页
+      // 4.获取初始化数据(部门/角色)
+
+      dispatch('getInitialPageListData', null, {root: true} )
+
+      // 5.登录跳转到首页
       router.push('/')
     },
 
@@ -74,6 +78,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       const token = localStorageWc.get('token')
       if(token){
         commit('tokenChange', token)
+        dispatch('getInitialPageListData', null, {root: true} )
       }
       const userInfo = localStorageWc.get('userInfo')
       if(userInfo) {

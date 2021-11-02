@@ -6,8 +6,8 @@
     <el-form ref="form" :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.field">
-          <el-col v-bind="colLayout">
-            <el-form-item :label="item.label" :style="itemStyle">
+          <el-col v-bind="colLayout" v-if="item.isSearch">
+            <el-form-item :label="item.label" :style="itemStyle" >
               <template v-if="item.type === 'input'">
                 <el-input style="max-width:180px" size="mini" :placeholder='item.placeholder' v-model="formData[`${item.field}`]"></el-input>
               </template>

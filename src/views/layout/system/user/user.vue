@@ -114,8 +114,8 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
             field: 'password',
             label: '密码',
             type: 'input',
+            isHidden: true
             // placeholder: '请输入密码',
-            // isHidden: true
           },
           {
             field: 'cellphone',
@@ -123,23 +123,36 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
             type: 'input',
             // placeholder: '请输入电话号码'
           },
-          // {
-          //   field: 'departmentId',
-          //   type: 'select',
-          //   label: '选择部门',
-          //   placeholder: '请选择部门',
-          //   options: []
-          // },
-          // {
-          //   field: 'roleId',
-          //   type: 'select',
-          //   label: '选择角色',
-          //   placeholder: '请选择角色',
-          //   options: []
-          // }
+          {
+            field: 'departmentId',
+            type: 'select',
+            label: '选择部门',
+            // placeholder: '请选择部门',
+            options: []
+          },
+          {
+            field: 'roleId',
+            type: 'select',
+            label: '选择角色',
+            // placeholder: '请选择角色',
+            options: []
+          }
         ],
         formData: {},
         title: '新增',
+      }
+    },
+    created() {
+      this.initOptions()
+    },
+    computed: {
+      entireDepartmentlist() {
+        console.log(this.$store.state.entireDepartment, '11111')
+        let departmentList = this.$store.state.entireDepartment
+        return departmentList
+      },
+      entireRoleList() {
+        return this.$store.state.entireRole
       }
     },
     methods: {
@@ -154,13 +167,45 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
       //编辑list数据
       editHandle(row) {
         this.title = '修改'
+        this.dialogFormItems.forEach( item => {
+          if(!item.isHidden) {
+            item.isSearch = true
+          }else {
+            item.isSearch = false
+          }
+        })
+        console.log(this.dialogFormItems, 'dialogFormItemsdialogFormItemsdialogFormItems')
         this.$refs.pageDialog.dialogFormVisible = true
         this.formData = row
       },
       //新增
       addHandle() {
+        this.initOptions()
+        this.title = '新增'
+        this.dialogFormItems.forEach( item => {
+          item.isSearch = true
+        })
+        this.formData = {}
         this.$refs.pageDialog.dialogFormVisible = true
         this.dialogFormVisible = true
+      },
+      initOptions() {
+        this.dialogFormItems.forEach( item => {
+          if(item.field == 'departmentId') {
+            item.options = this.entireDepartmentlist.map( item => ({
+              name: item.name,
+              value: item.id
+            }))
+          }
+        })
+        this.dialogFormItems.forEach( item => {
+          if(item.field == 'roleId') {
+            item.options = this.entireRoleList.map( item => ({
+              name: item.name,
+              value: item.id
+            }))
+          }
+        })
       }
     }
   }
