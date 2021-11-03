@@ -22,6 +22,7 @@
       :formData="formData" 
       width='40%' 
       :title='title'
+      pageName="users"
     />
 
   </div>
@@ -194,7 +195,7 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
         this.formData = {}
         this.$refs.pageDialog.dialogFormVisible = true
         this.dialogFormVisible = true
-      },
+      }
     }
   }
 </script>

@@ -2,7 +2,7 @@
 import { Module } from "vuex/types/index.js";
 import type { ISystemState } from './types'
 import type { IRootState } from '@/store/types'
-import { getListData, htttpDeleteHandle } from '@/api/main/system/system'
+import { getListData, htttpDeleteHandle, httpAddHandle, httpEditHandle } from '@/api/main/system/system'
 import message from "element-plus/lib/components/message";
 const systemStore: Module<ISystemState, IRootState> = {
   namespaced: true,
@@ -64,7 +64,42 @@ const systemStore: Module<ISystemState, IRootState> = {
           offset: 0
         }
       })
-    }
+    },
+
+    //新增页面数据
+    async addHandle( { dispatch }, payLoad) {
+      const { pageName, data } = payLoad
+      const url = `/${pageName}`
+      const res: any = await httpAddHandle(url, data)
+      message.info(res.data)
+
+      //刷新列表
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          size: 10,
+          offset: 0
+        }
+      })
+    },
+
+    //修改页面数据
+    async editHandle( { dispatch }, payLoad) {
+      const { pageName, data } = payLoad
+      const url = `/${pageName}/${data.id}`
+      const res: any = await httpEditHandle(url, data)
+      message.info(res.data)
+
+      //刷新列表
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          size: 10,
+          offset: 0
+        }
+      })
+    },
+
   }
 }
 

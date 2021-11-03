@@ -16,3 +16,21 @@ export const htttpDeleteHandle = (url: any) => {
     url: url
   })
 }
+
+//新增数据
+export const httpAddHandle = (url: any, data: any) => {
+  return request({
+    method: 'POST',
+    url: url,
+    data
+  })
+}
+
+//修改数据
+export const httpEditHandle = (url: any, data: any) => {
+  return request({
+    method: 'patch',
+    url: url,
+    data
+  })
+}

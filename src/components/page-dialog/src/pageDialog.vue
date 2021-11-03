@@ -49,6 +49,10 @@ export default {
     title: {
       type: String,
       default: '新增'
+    },
+    pageName: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -58,7 +62,18 @@ export default {
   },
   methods: {
     comfirmHandle() {
-      this.$emit('save', this.formData)
+      if(this.title=='新增') {
+        this.$store.dispatch('system/addHandle', {
+          pageName: this.pageName,
+          data: this.formData
+        })
+      }else {
+        this.$store.dispatch('system/editHandle', {
+          pageName: this.pageName,
+          data: this.formData
+        })
+      }
+      this.dialogFormVisible = false
     }
   }
 }
