@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     comfirmHandle() {
-      console.log(this.formData, 'formDataaaaaaaaaaaaaaaa')
+      this.$emit('save', this.formData)
     }
   }
 }

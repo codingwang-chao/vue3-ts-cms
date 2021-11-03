@@ -160,12 +160,12 @@ export default {
         id: row.id,
         pageName: this.pageName
       })
-      console.log(row.id, 'valueeeeeeeeeeeeeeeee')
     },
     //编辑
     editHandle(row) {
       this.$emit('editHandle', row)
     },
+    //新增
     addHandle() {
       this.$emit('addHandle')
     }

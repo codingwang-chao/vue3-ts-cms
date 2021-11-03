@@ -1,5 +1,6 @@
 <template>
   <div class="userContainer">
+
     <page-search
       :formItems='formItems'
       labelWidth='90px'
@@ -17,7 +18,7 @@
 
     <page-dialog 
       ref="pageDialog" 
-      :dialogFormItems="dialogFormItems" 
+      :dialogFormItems="dialogFormItemsComputed" 
       :formData="formData" 
       width='40%' 
       :title='title'
@@ -139,20 +140,29 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
           }
         ],
         formData: {},
-        title: '新增',
+        title: '',
       }
     },
-    created() {
-      this.initOptions()
-    },
     computed: {
-      entireDepartmentlist() {
-        console.log(this.$store.state.entireDepartment, '11111')
-        let departmentList = this.$store.state.entireDepartment
-        return departmentList
-      },
-      entireRoleList() {
-        return this.$store.state.entireRole
+      //获取下拉框选项，更新dialogFormItem，解决页面刷新时，vuex数据为空问题
+      dialogFormItemsComputed ()  {
+        this.dialogFormItems.forEach( item => {
+          if(item.field == 'departmentId') {
+            item.options = this.$store.state.entireDepartment.map( item => ({
+              name: item.name,
+              value: item.id
+            }))
+          }
+        })
+        this.dialogFormItems.forEach( item => {
+          if(item.field == 'roleId') {
+            item.options = this.$store.state.entireRole.map( item => ({
+              name: item.name,
+              value: item.id
+            }))
+          }
+        })
+        return this.dialogFormItems
       }
     },
     methods: {
@@ -168,45 +178,23 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
       editHandle(row) {
         this.title = '修改'
         this.dialogFormItems.forEach( item => {
-          if(!item.isHidden) {
-            item.isSearch = true
+          if(item.isHidden) {
+            item.noSearch = true
           }else {
-            item.isSearch = false
+            item.noSearch = false
           }
         })
-        console.log(this.dialogFormItems, 'dialogFormItemsdialogFormItemsdialogFormItems')
         this.$refs.pageDialog.dialogFormVisible = true
         this.formData = row
       },
       //新增
       addHandle() {
-        this.initOptions()
         this.title = '新增'
-        this.dialogFormItems.forEach( item => {
-          item.isSearch = true
-        })
+        this.dialogFormItems.forEach( item => { item.noSearch = false })
         this.formData = {}
         this.$refs.pageDialog.dialogFormVisible = true
         this.dialogFormVisible = true
       },
-      initOptions() {
-        this.dialogFormItems.forEach( item => {
-          if(item.field == 'departmentId') {
-            item.options = this.entireDepartmentlist.map( item => ({
-              name: item.name,
-              value: item.id
-            }))
-          }
-        })
-        this.dialogFormItems.forEach( item => {
-          if(item.field == 'roleId') {
-            item.options = this.entireRoleList.map( item => ({
-              name: item.name,
-              value: item.id
-            }))
-          }
-        })
-      }
     }
   }
 </script>
