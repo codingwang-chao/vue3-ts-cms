@@ -78,6 +78,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       const token = localStorageWc.get('token')
       if(token){
         commit('tokenChange', token)
+        //如果在模块里请求根里面的要加上{root: true}
         dispatch('getInitialPageListData', null, {root: true} )
       }
       const userInfo = localStorageWc.get('userInfo')

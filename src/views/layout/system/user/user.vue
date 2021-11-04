@@ -19,7 +19,6 @@
     <page-dialog 
       ref="pageDialog" 
       :dialogFormItems="dialogFormItemsComputed" 
-      :formData="formData" 
       width='40%' 
       :title='title'
       pageName="users"
@@ -186,13 +185,15 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
           }
         })
         this.$refs.pageDialog.dialogFormVisible = true
-        this.formData = row
+        //为了防止浅拷贝在接收这个参数时，pageContent里面做了深拷贝，如果在这里使用
+        // this.formData =  { ...row}让后栽通过props传进去也不会双向绑定
+        this.$refs.pageDialog.formData = row
       },
       //新增
       addHandle() {
         this.title = '新增'
         this.dialogFormItems.forEach( item => { item.noSearch = false })
-        this.formData = {}
+        this.$refs.pageDialog.formData = {}
         this.$refs.pageDialog.dialogFormVisible = true
         this.dialogFormVisible = true
       }

@@ -18,24 +18,39 @@ const store =  createStore({
     changeEntireRole(state, payload) {
       state.entireRole = payload
     },
+    changeEntireMenu(state, payLoad) {
+      state.entireMenu = payLoad
+    }
   },
   actions: {
     async getInitialPageListData({ commit }) {
+
+      //获取部门列表数据
       const departmentDataList: any = await getListData( '/department/list', {
         offset: 0,
         size: 1000
       })
       const departmentList = departmentDataList.data.list
-      console.log(departmentDataList, 'datalogggggggggggggg')
+
       // 获取角色列表数据
       const roleListData: any = await getListData('/role/list', {
         offset: 0,
         size: 1000
       })
       const roleList = roleListData.data.list
+
+      //获取角色列表数据
+      const menuListData: any = await getListData('/menu/list', {
+        offset: 0,
+        size: 1000
+      })
+      const menuList: any = menuListData.data.list
+
+      console.log(menuList, 'menuKListttttttttttttttt')
       
       commit('changeEntireDepartment', departmentList)
       commit('changeEntireRole', roleList)
+      commit('changeEntireMenu', menuList)
     }
   },
   modules: {

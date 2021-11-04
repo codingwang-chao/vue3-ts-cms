@@ -163,7 +163,9 @@ export default {
     },
     //编辑
     editHandle(row) {
-      this.$emit('editHandle', row)
+      // 不能直接将值直接传过去，直接传过去是浅拷贝，会双向绑定，所以要深拷贝
+      const selectRow = JSON.stringify(row)
+      this.$emit('editHandle', JSON.parse(selectRow))
     },
     //新增
     addHandle() {

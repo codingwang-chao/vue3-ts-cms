@@ -19,5 +19,6 @@ dayjs.extend(utc)
 const DATA_ITEM_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
 export function formatUtcString(utcString: any, format = DATA_ITEM_FORMAT) {
-  return dayjs.utc(utcString).format(format)
+  //.utcOffset(8)时区偏移8小时，到东八区
+  return dayjs.utc(utcString).utcOffset(8).format(format)
 }

@@ -1,14 +1,16 @@
 <template>
   <div class="pageDialogContainer">
     <el-dialog 
+      left
       :title="title" 
       v-model="dialogFormVisible" 
       destroy-on-close
       :width="width"
-      left
     >
 
       <base-form :formItems="dialogFormItems" v-model="formData" :colLayout="colLayout"></base-form>
+
+      <slot></slot>
 
       <template #footer>
         <span class="dialog-footer">
@@ -32,10 +34,11 @@ export default {
       type: Array,
       default: () => ([])
     },
-    formData: {
-      type: Object,
-      default: () => ({})
-    },
+    // 如果直接从页面传进来会导致与页面数据双向绑定
+    // formData: {
+    //   type: Object,
+    //   default: () => ({})
+    // },
     colLayout: {
       type: Object,
       default: () => ({
@@ -53,24 +56,29 @@ export default {
     pageName: {
       type: String,
       required: true
+    },
+    otherInfo: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
     return {
-      dialogFormVisible: false
+      dialogFormVisible: false,
+      formData: {}
     }
   },
   methods: {
     comfirmHandle() {
-      if(this.title=='新增') {
+      if(this.title == '新增') {
         this.$store.dispatch('system/addHandle', {
           pageName: this.pageName,
-          data: this.formData
+          data: { ...this.formData, ...this.otherInfo }
         })
-      }else {
+      }else if(this.title == '修改'){
         this.$store.dispatch('system/editHandle', {
           pageName: this.pageName,
-          data: this.formData
+          data: { ...this.formData, ...this.otherInfo }
         })
       }
       this.dialogFormVisible = false
