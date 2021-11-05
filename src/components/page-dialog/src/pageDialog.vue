@@ -1,7 +1,6 @@
 <template>
   <div class="pageDialogContainer">
     <el-dialog 
-      left
       :title="title" 
       v-model="dialogFormVisible" 
       destroy-on-close

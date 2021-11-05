@@ -45,8 +45,6 @@ const store =  createStore({
         size: 1000
       })
       const menuList: any = menuListData.data.list
-
-      console.log(menuList, 'menuKListttttttttttttttt')
       
       commit('changeEntireDepartment', departmentList)
       commit('changeEntireRole', roleList)

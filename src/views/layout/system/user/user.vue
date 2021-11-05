@@ -184,10 +184,10 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
             item.noSearch = false
           }
         })
-        this.$refs.pageDialog.dialogFormVisible = true
+        this.$refs.pageDialog.formData = row
         //为了防止浅拷贝在接收这个参数时，pageContent里面做了深拷贝，如果在这里使用
         // this.formData =  { ...row}让后栽通过props传进去也不会双向绑定
-        this.$refs.pageDialog.formData = row
+        this.$refs.pageDialog.dialogFormVisible = true
       },
       //新增
       addHandle() {

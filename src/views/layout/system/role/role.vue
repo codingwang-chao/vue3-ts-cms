@@ -26,6 +26,7 @@
     >
 
      <el-tree
+      ref="roleTree"
       :data="menusList"
       show-checkbox
       node-key="id"
@@ -42,6 +43,7 @@
 import PageSearch from '@/components/page-seach'
 import pageContent from '@/components/page-content'
 import pageDialog from '@/components/page-dialog'
+import { mapTreeLastChildren } from '@/utils/mapLeafChildren'
   export default {
     components: {
       PageSearch,
@@ -104,6 +106,7 @@ import pageDialog from '@/components/page-dialog'
       //编辑list数据
       editHandle(row) {
         this.title = '修改'
+        //设置属性，dialogFormItems中isHidden为true修改时不显示
         this.dialogFormItems.forEach( item => {
           if(item.isHidden) {
             item.noSearch = true
@@ -111,10 +114,15 @@ import pageDialog from '@/components/page-dialog'
             item.noSearch = false
           }
         })
-        this.$refs.pageDialog.dialogFormVisible = true
         //为了防止浅拷贝在接收这个参数时，pageContent里面做了深拷贝，如果在这里使用
         // this.formData =  { ...row}让后栽通过props传进去也不会双向绑定
+        const treeChildren = mapTreeLastChildren(row.menuList)
         this.$refs.pageDialog.formData = row
+        this.$refs.pageDialog.dialogFormVisible = true
+        //使用nextTick在页面更新后赋值，这样才能赋值上去
+        this.$nextTick( () => {
+          this.$refs.roleTree.setCheckedKeys(treeChildren, false)
+        })
       },
       //新增
       addHandle() {
