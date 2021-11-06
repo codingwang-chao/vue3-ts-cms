@@ -8,10 +8,8 @@
         <el-header>
           <layout-header @foldClick='foldClick' />
         </el-header>
-        <el-main>
-          <div class="main-info">
-            <router-view />
-          </div>
+        <el-main class="main-info">
+          <router-view />
         </el-main>
       </el-container>
     </el-container>
@@ -44,15 +42,10 @@ export default {
   .container-layout {
     height: 100%;
 
-    .el-main {
-      padding-top: 10px;
-      line-height: 30px;
-      // text-align: center;
-      background-color: #f5f5f5;
-    }
-
     .main-info {
-      background-color: #ffffff;
+      padding-top: 20px;
+      line-height: 30px;
+      background-color: #eef0f4;
       border-radius: 5px;
     }
   }
@@ -64,31 +57,4 @@ export default {
     transition: width 0.5s;
   }
 }
-.el-header,
-  .el-footer {
-    background-color: #ffffff;
-    color: var(--el-text-color-primary);
-    line-height: 60px;
-  }
-
-  .el-aside {
-    background-color: #33404d;
-    color: var(--el-text-color-primary);
-    line-height: 100vh;
-  }
-
-  .el-main {
-    background-color: #e9eef3;
-    color: var(--el-text-color-primary);
-    line-height: 160px;
-  }
-
-  body > .el-container {
-    margin-bottom: 40px;
-  }
-
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
-
 </style>

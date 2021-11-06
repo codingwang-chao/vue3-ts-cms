@@ -67,3 +67,9 @@ import baseForm from '@/base-ui/base-form/index.js'
     }
   }
 </script>
+<style lang="less" scoped>
+.userContainer {
+  background-color: #ffffff;
+}
+  
+</style>

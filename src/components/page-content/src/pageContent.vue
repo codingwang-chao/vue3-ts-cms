@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pageContentContainer">
     <base-table 
       :propList='dataList' 
       :tableItems='tableItems' 
@@ -175,6 +175,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang='less' scoped>
+.pageContentContainer {
+  background-color: #ffffff;
+  border-top: 20px solid #eef0f4;
+}
 </style>

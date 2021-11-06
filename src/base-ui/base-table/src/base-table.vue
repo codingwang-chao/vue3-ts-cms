@@ -102,7 +102,6 @@ export default {
 <style lang='less' scoped>
   .tableStyle {
       padding: 20px;
-      border-top: 20px solid #f5f5f5;
 
       .header{ 
         display: flex;

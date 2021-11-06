@@ -86,6 +86,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang='less' scoped>
+.pageDialogContainer {
+  background-color: #ffffff;
+}
 </style>
