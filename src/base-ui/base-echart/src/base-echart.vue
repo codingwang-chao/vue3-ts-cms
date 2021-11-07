@@ -35,7 +35,9 @@ export default {
     }
   },
   mounted() {
-    this.myEchart = echarts.init(this.$refs.echartsRef)
+    this.myEchart = echarts.init(this.$refs.echartsRef, 'theme', {
+    renderer: 'svg'
+  })
     this.mountedEchart()
     // this.myEchart.setOption(this.option)
 

@@ -3,7 +3,7 @@
     <base-table 
       :propList='dataList' 
       :tableItems='tableItems' 
-      :showSelectBox='true' 
+      :showSelectBox='showSelectBox' 
       showIndexColumn 
       @selectionChange='handleSelectionChange'
       :childrenProp='childrenProp'
@@ -81,6 +81,10 @@ export default {
       default: () => ({})
     },
     footerSlot: {
+      type: Boolean,
+      default: true
+    },
+    showSelectBox: {
       type: Boolean,
       default: true
     }

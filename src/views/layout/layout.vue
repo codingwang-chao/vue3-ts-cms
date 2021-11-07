@@ -23,7 +23,7 @@ export default {
   components: { layoutAside, LayoutHeader },
   data() {
     return {
-      isCollapse: true
+      isCollapse: false
     }
   },
   methods: {
@@ -43,6 +43,7 @@ export default {
     height: 100%;
 
     .main-info {
+      background-color: rgb(17, 5, 5);
       padding-top: 20px;
       line-height: 30px;
       background-color: #eef0f4;

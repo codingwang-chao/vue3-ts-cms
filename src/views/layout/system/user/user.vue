@@ -12,6 +12,7 @@
       ref="pageContent"
       :tableItems='tableItems'
       pageName="users"
+      :showSelectBox="false"
       @editHandle='editHandle'
       @addHandle="addHandle"
     />
@@ -28,12 +29,12 @@
 </template>
 
 <script>
-import PageSearch from '@/components/page-seach'
+import pageSearch from '@/components/page-seach'
 import pageContent from '@/components/page-content'
 import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
   export default {
     components: {
-      PageSearch,
+      pageSearch,
       pageContent,
       PageDialog
     },
@@ -202,10 +203,7 @@ import PageDialog from '@/components/page-dialog/src/pageDialog.vue'
 </script>
 
 <style lang="less" scoped>
-  .userContainer {
-    .tableStyle {
-      padding: 20px;
-      border-top: 20px solid #f5f5f5;
-    }
-  }
+  // .userContainer {
+  //   // background-color: red;
+  // }
 </style>

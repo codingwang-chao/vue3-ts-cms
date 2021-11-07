@@ -102,6 +102,11 @@ export default {
 <style lang='less' scoped>
   .tableStyle {
       padding: 20px;
+      
+      /deep/.el-table .el-table__cell{
+        padding:10 !important;//这里要提高优先级，不然可能不会被显示。
+        height:30px !important;
+      }
 
       .header{ 
         display: flex;
@@ -113,7 +118,7 @@ export default {
       .footer {
         display: flex;
         justify-content: end;
-        margin-top: 10px;
+         margin-top: 10px;
       }
     }
 </style>

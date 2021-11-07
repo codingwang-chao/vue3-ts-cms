@@ -5,7 +5,7 @@
       status-icon
       :rules="rules"
       ref="ruleForm"
-      label-width="50px"
+      label-width="70px"
       class="demo-ruleForm"
     >
       <el-form-item label="账号" prop="name">

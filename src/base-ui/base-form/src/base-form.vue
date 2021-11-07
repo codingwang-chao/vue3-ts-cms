@@ -1,6 +1,6 @@
 <template>
   <div class="formContainer">
-    <div>
+    <div class="headerStyle">
       <slot name="header"></slot>
     </div>
     <el-form ref="form" :label-width="labelWidth">
@@ -113,6 +113,10 @@
 <style lang="less" scoped>
   .formContainer {
     padding: 0px;
+
+    .headerStyle {
+      text-align: center;
+    }
 
     .el-form-item {
       margin: 5px 10px;
