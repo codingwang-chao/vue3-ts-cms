@@ -4,7 +4,8 @@
       :model="ruleForm"
       status-icon
       :rules="rules"
-      ref="ruleForm"
+      ref="ruleFormRef"
+
       label-width="70px"
       class="demo-ruleForm"
     >
@@ -38,8 +39,8 @@ export default {
     return {
       isKeepPassword: true,
       ruleForm: {
-        name: localStorageWc.get('name') ?? '',
-        password: localStorageWc.get('password') ?? ''
+        name: localStorageWc.get('name') ?? 'coderwhy',
+        password: localStorageWc.get('password') ?? '123456'
       },
       rules: {
         name: [
@@ -55,7 +56,7 @@ export default {
   },
   methods: {
     loginBtn() {
-      this.$refs.ruleForm.validate( async flag => {
+      this.$refs.ruleFormRef.validate( async flag => {
         if(flag) {
           if(this.isKeepPassword) {
             localStorageWc.set('name', this.ruleForm.name)
@@ -66,7 +67,7 @@ export default {
           }
 
           //在store中login完成登录的操作
-          this.$store.dispatch('login/accountLoginAction', { ...this.ruleForm})
+          this.$store.dispatch('login/accountLoginAction', this.ruleForm)
         }
       })
     }

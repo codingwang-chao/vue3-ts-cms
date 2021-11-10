@@ -45,10 +45,14 @@ const loginModule: Module<ILoginState, IRootState> = {
   actions: {
     //用户点击登录调用
     async accountLoginAction({ commit, dispatch }, payload: any) {
-      console.log(payload, 'data')
+
+      const loginInfo = {
+        name: payload.name,
+        password: payload.password
+      }
 
       // 1.实现登录逻辑
-      const loginResult: any = await loginHttp(payload)
+      const loginResult: any = await loginHttp(loginInfo)
       const { token, id} = loginResult.data
       commit('tokenChange', token)
       localStorageWc.set('token', token)

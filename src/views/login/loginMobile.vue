@@ -3,7 +3,7 @@
     <el-form
       :model="ruleForm"
       status-icon
-      ref="ruleForm"
+      ref="ruleFormRef"
       label-width="80px"
       class="demo-ruleForm"
     >

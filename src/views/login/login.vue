@@ -7,13 +7,13 @@
           <template #label>
             <span><i class="el-icon-user"></i> 账号登录</span>
           </template>
-          <login-user ref="userLogin" />
+          <login-user ref="userLoginRef" />
         </el-tab-pane>
         <el-tab-pane name="mobileLogin">
           <template #label>
             <span><i class="el-icon-mobile-phone"></i> 手机登录</span>
           </template>
-          <login-mobile ref="mobileLogin" />
+          <login-mobile ref="mobileLoginRef" />
         </el-tab-pane>
       </el-tabs>
       <el-button class="buttonLogin" type="primary" @click="loginClick">登录</el-button>
@@ -37,9 +37,9 @@ export default {
   methods: {
     loginClick() {
       if(this.activeLogin === 'userLogin') {
-        this.$refs.userLogin.loginBtn()
+        this.$refs.userLoginRef.loginBtn()
       } else if(this.activeLogin === 'mobileLogin') {
-        this.$refs.mobileLogin.loginBtn()
+        this.$refs.mobileLoginRef.loginBtn()
       }
     }
   },

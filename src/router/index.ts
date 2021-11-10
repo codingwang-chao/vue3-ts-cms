@@ -50,14 +50,14 @@ router.beforeEach((to, from, next) => {
 
       // 如果是第一次登录,会跳到用户第一个权限路由
       if(to.path === '/layout'){
+        console.log(firstMenu.url, 'rlllllllllll')
         router.push(firstMenu.url)
       }
       next()
     }else {
       next('/login')
     }
-  }
-  else {
+  } else {
     next()
   }
 })
