@@ -12,6 +12,7 @@
       ref="pageContent"
       :tableItems='tableItems'
       pageName="role"
+      tableTitle="角色列表"
       @editHandle='editHandle'
       @addHandle="addHandle"
     />

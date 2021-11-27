@@ -3,6 +3,7 @@
     <page-content 
       ref="pageContent"
       :tableItems='tableItems'
+      tableTitle='菜单列表'
       pageName="menu"
       :childrenProp='childrenProp'
       :footerSlot='false'
@@ -19,10 +20,10 @@ export default {
   data() {
     return {
       tableItems: [
-        { prop: 'name', label: '菜单名称', width: '100' },
+        { prop: 'name', label: '菜单名称', width: '180' },
         { prop: 'type', label: '类型', width: '60' },
-        { prop: 'url', label: '菜单url', width: '100' },
-        { prop: 'icon', label: '菜单icon', width: '100' },
+        { prop: 'url', label: '菜单url', width: '200' },
+        { prop: 'icon', label: '菜单icon', width: '200' },
         { prop: 'permission', label: '按钮权限', width: '100' },
         {
           prop: 'createAt',

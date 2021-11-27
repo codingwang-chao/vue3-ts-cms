@@ -12,6 +12,7 @@
       ref="pageContent"
       :tableItems='tableItems'
       pageName="users"
+      tableTitle="用户列表"
       :showSelectBox="false"
       @editHandle='editHandle'
       @addHandle="addHandle"

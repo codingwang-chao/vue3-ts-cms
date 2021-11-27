@@ -2,6 +2,7 @@
   <div class="goodsContainer">
     <page-content 
       ref="pageContent"
+      tableTitle="商品列表"
       :tableItems='tableItems'
       pageName="goods"
     >

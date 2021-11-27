@@ -10,7 +10,7 @@
     >
 
       <template #headerLeft>
-        <span>用户列表</span>
+        <span>{{tableTitle}}</span>
       </template>
 
       <!-- 如果里面有对应的插槽就会匹配替代里面的内容， 如果里面没有对应插槽的名字，就显示里面默认的名字 -->
@@ -87,6 +87,10 @@ export default {
     showSelectBox: {
       type: Boolean,
       default: true
+    },
+    tableTitle: {
+      type: String,
+      default: '列表'
     }
   },
   data() {
